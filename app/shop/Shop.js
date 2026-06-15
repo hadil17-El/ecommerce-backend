@@ -3,7 +3,7 @@ import ProductCard from "../components/ProductCard"
 import { getLatestProducts,searchProducts ,getProducts, getProductsByCategory,getProductsByGender } from "../api/api"
 import { useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
-import "./shop.css"
+import "./shopPage.css"
 export default function Shop(){
     const searchParams= useSearchParams()
     const type = searchParams.get("type")
