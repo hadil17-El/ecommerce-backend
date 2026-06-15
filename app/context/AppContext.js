@@ -30,6 +30,7 @@ export function AppProvider({children}){//è il componente che riempie il conten
         }
       
         //perche chiamiamo load() dentro useEffect invece di mettere tutto direttamente in useEffect? perche useEffect non può essere async direttamente,quindi dobbiamo creare una funzione async separata (load) e poi chiamarla dentro useEffect.
+        //perche chiamiamo load() dentro useEffect inece di mettere tutto direttamente in useEffect? perche useEffect non può essere async direttamente,quindi dobbiamo creare una funzione async separata (load) e poi chiamarla dentro useEffect.
         //prima definiamo la funzione async load() che contiene tutte le chiamate asincrone e poi la chiamiamo dentro useEffect per eseguirla quando il componente si monta.
         load()
     },[]) //cosi riempie il context
