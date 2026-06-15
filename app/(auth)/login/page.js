@@ -103,9 +103,7 @@ Login to continue shopping
           
     </form>
     {error && <p className="error">{error}</p>}
-     <div className="auth-link">
-         <Link href="/forgot-password">Password dimenticata?</Link>
-         </div>
+   
     <div className="auth-redirect">
         <span>Non hai un account</span>
           <Link href="/register" className="auth-redirect-link">Registrati</Link>
