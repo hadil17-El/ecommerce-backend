@@ -53,7 +53,7 @@ setError("")
 l’errore vecchio resta visibile anche se il nuovo login potrebbe funzionare. */
     setError("")
     try{
-        const res=await fetch("http://localhost/ecommerce/login.php",{
+        const res=await fetch("https://e-commerce.ifree.page/login.php",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"

@@ -12,7 +12,7 @@ export default function RegisterPage(){
         e.preventDefault()
         console.log("form: ",form)
 try{
-        const res = await fetch("http://localhost/ecommerce/register.php",{
+        const res = await fetch("https://e-commerce.ifree.page/register.php",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
