@@ -163,7 +163,7 @@ async function handleUpdate(){
                                 onChange={(e)=>setForm({...form,gender:e.target.value}) }
                                 />
                             </div>
-                       {/**disabled={loading}:cosa signfica  */}
+                       {/**disabled={loading}:cosa signfica : significa che l 'attributo disabled del pulsante assume il valore della variabile loading ,quindi se loading è true allora il pulsante è disabilitato e non puo essere cliccato   */}
                             <button className="btn-add" type="submit" disabled={loading}>
                                 {loading ? "Aggiunta...":"+ Aggiungi prodotto"}
                                 </button>

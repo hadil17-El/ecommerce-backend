@@ -1,6 +1,6 @@
 
 
-const BASE_URL="http://localhost/ecommerce/products.php"
+const BASE_URL="http://e-commerce.ifree.page/products.php"
 
 function getAuthHeaders(){
     const token = localStorage.getItem("token")
@@ -66,7 +66,7 @@ export async function getLatestProducts(){
 }
 
 
-const CART_URL ="http://localhost/ecommerce/cart.php"
+const CART_URL ="http://e-commerce.ifree.page/cart.php"
 
 
 export async function addToCart(product_id){
@@ -100,7 +100,7 @@ export async function getCart(){
 }
 export async function removeFromCart(id){
 const res = await fetch(
-    "http://localhost/ecommerce/cart.php",{
+    "http://e-commerce.ifree.page/cart.php",{
         method:"DELETE",
         headers:{
             "Content-Type":"application/json",
@@ -114,7 +114,7 @@ return res.json()
 }
 export async function getRecommendedProducts(userId){
     const res = await fetch(
-        `http://localhost/ecommerce/products.php?recommended=1&user_id=${userId}`
+        `http://e-commerce.ifree.page/products.php?recommended=1&user_id=${userId}`
 
     )
     if (!res.ok) return []
@@ -137,7 +137,7 @@ export async function updateProduct(product){
 }
 export async function getUsers() {
     const res = await fetch(
-        "http://localhost/ecommerce/users.php",
+        "http://e-commerce.ifree.page/users.php",
         {
             headers:{
                 Authorization:`Bearer ${localStorage.getItem("token")}`
@@ -150,7 +150,7 @@ export async function getUsers() {
 
 export async function getAnalytics() {
     const res = await fetch(
-        "http://localhost/ecommerce/analytics.php",
+        "http://e-commerce.ifree.page/analytics.php",
         {
             headers:{
                 Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -166,7 +166,7 @@ export async function getAnalytics() {
   }
 }
 export async function updateCartQuantity(id, action) {
-    const res = await fetch("http://localhost/ecommerce/cart.php", {
+    const res = await fetch("http://e-commerce.ifree.page/cart.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -181,7 +181,7 @@ export async function updateCartQuantity(id, action) {
     return res.json()
 }
 
-const FAVORITES_URL = "http://localhost/ecommerce/favorites.php"
+const FAVORITES_URL = "http://e-commerce.ifree.page/favorites.php"
 
 // GET
 export async function getFavorites(){
@@ -222,7 +222,7 @@ export async function removeFavorite(product_id){
     return res.json()
 }
 export async function toggleFavorite(product_id){
-    const res = await fetch("http://localhost/ecommerce/favorites.php", {
+    const res = await fetch("http://e-commerce.ifree.page/favorites.php", {
         method: "POST",
         headers: {
             "Content-Type":"application/json",
@@ -235,32 +235,32 @@ export async function toggleFavorite(product_id){
 }
 export async function getProductsByGender(gender){
     const res = await fetch(
-        `http://localhost/ecommerce/products.php?gender=${gender}`
+        `http://e-commerce.ifree.page/products.php?gender=${gender}`
     )
     return res.json()
 }
 export async function getProductsByCategory(category){
     const res = await fetch(
-        `http://localhost/ecommerce/products.php?category=${category}`
+        `http://e-commerce.ifree.page/products.php?category=${category}`
     )
     return res.json()
 }
 export async function getSaleProducts(){
     const res = await fetch(
-        "http://localhost/ecommerce/products.php?sale=true"
+        "http://e-commerce.ifree.page/products.php?sale=true"
     )
     return res.json()
 }
 export async function searchProducts(query){
     const res = await fetch(
-        `http://localhost/ecommerce/products.php?search=${query}`
+        `http://e-commerce.ifree.page/products.php?search=${query}`
     )
     const text =await res.text()
     if(!text) return []
     return JSON.parse(text)
 }
 export async function getOrders(){
-    const res =await fetch("http://localhost/ecommerce/orders.php",{
+    const res =await fetch("http://e-commerce.ifree.page/orders.php",{
         headers:{
             Authorization:`Bearer ${localStorage.getItem("token")}`
         }
@@ -268,7 +268,7 @@ export async function getOrders(){
     return res.json()
 }
 export async function getOrderDetails(id){
-    const res = await fetch(`http://localhost/ecommerce/orders.php?id=${id}`,{
+    const res = await fetch(`http://e-commerce.ifree.page/orders.php?id=${id}`,{
         headers:{
         Authorization:`Bearer ${localStorage.getItem("token")}`
             }
@@ -277,7 +277,7 @@ export async function getOrderDetails(id){
 }
 export async function checkoutOrder(){
 const res=await fetch(
-    "http://localhost/ecommerce/checkout.php",{
+    "http://e-commerce.ifree.page/checkout.php",{
         method:"POST",
         headers:{
             "Content-Type":"application/json",
