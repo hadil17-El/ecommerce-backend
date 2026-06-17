@@ -29,7 +29,8 @@ export default function Login(){
 
         const res = await fetch("https://e-commerce.ifree.page/login.php", {
             method: "POST",
-            body: formData
+            body: formData,
+            credentials: "include"
         })
 
         const data = await res.json()
