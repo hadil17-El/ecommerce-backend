@@ -27,11 +27,16 @@ export default function Login(){
         formData.append("email", form.email)
         formData.append("password", form.password)
 
-        const res = await fetch("https://e-commerce.ifree.page/login.php", {
-            method: "POST",
-            body: formData,
-            credentials: "include"
-        })
+     const res = await fetch("https://e-commerce.ifree.page/login.php", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        email: form.email,
+        password: form.password
+    })
+})
 
         const data = await res.json()
 
