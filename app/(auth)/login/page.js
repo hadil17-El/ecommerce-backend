@@ -16,26 +16,27 @@ export default function Login(){
     const [loading,setLoading]=useState(false)
     const router = useRouter()
     //Funzione per gestire il login dell'utente.
-  async function handleLogin(e) {
+  async function handleLogin(e){
     e.preventDefault()
+
     setLoading(true)
     setError("")
 
     try {
-        // Prima visita per ottenere il cookie anti-bot
-        await fetch("https://e-commerce.ifree.page/login.php?i=1", {
-            method: "GET",
-            credentials: "include",
-            mode: "no-cors"
-        })
+        const formData = new FormData()
+        formData.append("email", form.email)
+        formData.append("password", form.password)
 
-        // Poi fai il login vero
-        const res = await fetch("https://e-commerce.ifree.page/login.php?i=1", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify({ email: form.email, password: form.password })
-        })
+     const res = await fetch("https://e-commerce.ifree.page/login.php", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        email: form.email,
+        password: form.password
+    })
+})
 
         const data = await res.json()
 
