@@ -27,7 +27,7 @@ export default function Login(){
         formData.append("email", form.email)
         formData.append("password", form.password)
 
-     const res = await fetch("https://e-commerce.ifree.page/login.php", {
+     const res = await fetch("/api/proxy/login.php", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
