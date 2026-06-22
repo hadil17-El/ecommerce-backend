@@ -1,5 +1,5 @@
 import mysql from "mysql2/promise";
-
+dns.setDefaultResultOrder("ipv4first");
 
 const pool = mysql.createPool({
   host:     process.env.DB_HOST,
