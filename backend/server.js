@@ -62,5 +62,13 @@ app.get("/debug-dns", (req, res) => {
     res.json({ address });
   });
 });
+app.get("/debug-dns2", (req, res) => {
+  dns.lookup("google.com", (err, address) => {
+    if (err) {
+      return res.json({ error: err.message });
+    }
+    res.json({ address });
+  });
+});
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
