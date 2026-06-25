@@ -46,7 +46,7 @@ router.delete("/",auth,async (req,res)=>{
     const {product_id} = req.body
     await db.query(
       `
-      DELETR FROM favorites
+      DELETE FROM favorites
       WHERE user_id = ?
       AND product_id =?`,
       [req.user.id,product_id]
