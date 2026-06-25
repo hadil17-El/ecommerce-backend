@@ -23,17 +23,24 @@ router.get("/",auth,async(req,res)=>{
 router.post("/", auth, async (req, res) => {
   try{
     const {product_id} = req.body
-    await db.query(
-      `
-      INSERT IGNORE INTO favorites
-      (user_id,product_id)
-      VALUES (?,?)
-      `,
-      [req.user.id,product_id]
+    const user_id = req.user.id
+    const [rows]=await db.query(
+      "SELECT * FROM favorites WHERE user_id=? AND product_id=?",
+      [user_id,product_id]
     )
-    res.json({
-      success:true
-    })
+    if(rows.length > 0) {
+      await db.query(
+        "DELETE FROM favorites WHERE user_id=? AND product_id=?",
+        [user_id,product_id]
+      )
+      return res.json({added:false})
+    }
+    await db.query(
+      "INSERT INTO favorites (user_id,product_id) VALUES (?,?)",
+      [user_id,product_id]
+    )
+    return res.json({added:true})
+   
   } catch (err){
     res.status(500).json({
       error:err.message
