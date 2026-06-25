@@ -1,7 +1,7 @@
 import Image from "next/image"
 import "./trends.css"
 import  Link  from "next/link"
-import { addToCart,getCart,toggleFavorite,getFavorites, removeFromCart } from "../api/api"
+import { addToCart,getCart,toggleFavorite,getFavorites, removeFromCart, removeFavorite, addFavorite } from "../api/api"
 import {useApp} from "../context/AppContext"
 import HeartButton from "./HeartButton"
 /**
@@ -53,6 +53,14 @@ export default function ProductCard({product}){
     async function handleFav(e){
         e.preventDefault()
         e.stopPropagation()
+        const exists = favorites.some(f=>f.id === product.id)
+        if(exists){
+            setFavorites(prev=>prev.filter(f=>f.id !== product.id))
+            await removeFavorite(product.id)
+        } else {
+            setFavorites(prev=>[...prev,product])
+            await addFavorite(product.id)
+        }
         await toggleFavorite(product.id)
         const updated = await getFavorites()
         setFavorites(Array.isArray(updated) ? updated : [])
