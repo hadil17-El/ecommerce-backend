@@ -27,7 +27,7 @@ export default function Login(){
         formData.append("email", form.email)
         formData.append("password", form.password)
 
-     const res = await fetch("https://e-commerce.ifree.page/login.php", {
+     const res = await fetch("https://ecommerce-backend-uwgf.onrender.com/login", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"

@@ -12,8 +12,7 @@ export default function RegisterPage(){
         e.preventDefault()
         console.log("form: ",form)
 try{
-        const res = await fetch("https://e-commerce.ifree.page/register.php",{
-            method:"POST",
+const res = await fetch("https://ecommerce-backend-uwgf.onrender.com/register", {            method:"POST",
             headers:{
                 "Content-Type":"application/json"
             },
