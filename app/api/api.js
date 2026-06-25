@@ -137,7 +137,7 @@ export async function updateProduct(product){
 }
 export async function getUsers() {
     const res = await fetch(
-        " https://ecommerce-backend-uwgf.onrender.com/users",
+        "https://ecommerce-backend-uwgf.onrender.com/users",
         {
             headers:{
                 Authorization:`Bearer ${localStorage.getItem("token")}`
