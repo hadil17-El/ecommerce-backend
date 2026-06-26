@@ -53,6 +53,14 @@ export default function ProductCard({product}){
     async function handleFav(e){
         e.preventDefault()
         e.stopPropagation()
+        const res = await toggleFavorite(product.id)
+        setFavorites(prev=>{
+            if(res.added){
+                return[...prev,product]
+            } else {
+                return prev.filter(f=>f.id !== product.id)
+            }
+        })
     await toggleFavorite(product.id)
     const updated = await getFavorites()
     setFavorites(updated)
