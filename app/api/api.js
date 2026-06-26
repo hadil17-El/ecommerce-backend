@@ -268,7 +268,7 @@ export async function getOrders(){
     return res.json()
 }
 export async function getOrderDetails(id){
-    const res = await fetch(` https://ecommerce-backend-uwgf.onrender.com/orders?id=${id}`,{
+    const res = await fetch(` https://ecommerce-backend-uwgf.onrender.com/orders/${id}`,{
         headers:{
         Authorization:`Bearer ${localStorage.getItem("token")}`
             }
