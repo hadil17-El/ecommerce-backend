@@ -35,6 +35,17 @@ router.get("/:id",auth,async (req,res)=> {
   })
 }
 })
+router.get("/",auth,async (req,res)=>{
+  try{
+    const [orders]=await db.query(
+      "SELECT * FROM orders WHERE user_id =? ORDER BY id DESC",
+      [req.user.id] 
+    )
+    res.json(orders)
+  } catch(err){
+    res.status(500).json({error:err.message})
+  }
+})
 
 
 export default router;
