@@ -10,7 +10,7 @@ router.get("/:id",auth,async (req,res)=> {
 
   
   const {rows: orderRows }=await db.query(
-    "SELECT * FROM orders WHERE id=? AND user_id=$1",
+    "SELECT * FROM orders WHERE id=$1 AND user_id=$2",
     [id,req.user.id]
   )
   if(orderRows.length === 0){
