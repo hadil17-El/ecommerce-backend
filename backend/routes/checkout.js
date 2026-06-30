@@ -2,16 +2,17 @@ import express from "express";
 import db from "../db.js";
 import auth from "../middleware.js";
 
+
 const router = express.Router();
 
 router.post("/", auth, async (req, res) => {
   const user_id = req.user.id;
-  const conn = await db.getConnection();
+  const client = await db.connect();
 
   try {
-    await conn.beginTransaction();
+    await client.query("BEGIN");
 
-    const [cart] = await conn.query(
+    const {rows: cart } = await client.query(
       `SELECT c.*, p.price FROM cart c 
        JOIN products p ON c.product_id = p.id 
        WHERE c.user_id = $1`,
@@ -19,34 +20,36 @@ router.post("/", auth, async (req, res) => {
     );
 
     if (cart.length === 0) {
-      await conn.rollback();
+      await client.query("ROLLBACK");
       return res.status(400).json({ error: "Cart Empty" });
     }
 
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const total = cart.reduce(
+      (sum, item) => sum + Number(item.price) * Number(item.quantity), 0);
 
-    const {result} = await conn.query(
-      "INSERT INTO orders (user_id, total, status) VALUES ($1, $2, 'pending')",
+    const {rows: orderRows} = await client.query(
+       `INSERT INTO orders (user_id, total, status) VALUES ($1, $2, 'pending') RETURNING id`,
       [user_id, total]
     );
-    const order_id = result.rows[0].insertId;
+    const order_id = orderRows[0].id;
 
     for (const item of cart) {
-      await conn.query(
-        "INSERT INTO order_items (order_id, product_id, quantity, price) VALUES ($1, $2, $3, $4)",
+      await client.query(
+         `INSERT INTO order_items (order_id, product_id, quantity, price) VALUES ($1, $2, $3, $4) `,
         [order_id, item.product_id, item.quantity, item.price]
       );
     }
 
-    await conn.query("DELETE FROM cart WHERE user_id = $1", [user_id]);
-    await conn.commit();
+    await client.query( `DELETE FROM cart WHERE user_id = $1 `, [user_id]);
+    await client.query("COMMIT");
 
     res.json({ message: "Order created", order_id });
   } catch (e) {
-    await conn.rollback();
+    await client.query("ROLLBACK");
+    console.error("CHECKOUT ERROR: ",err)
     res.status(500).json({ error: e.message });
   } finally {
-    conn.release();
+    client.release();
   }
 });
 

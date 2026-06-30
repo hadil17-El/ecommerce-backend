@@ -35,8 +35,8 @@ router.post("/", async (req, res) => {
       token,
       user: { id: user.id, email: user.email, role: user.role }
     });
-  } catch  {
-    res.status(500).json({ error: "Errore server" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 

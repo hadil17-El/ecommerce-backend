@@ -5,17 +5,18 @@ import auth from "../middleware.js";
 const router = express.Router();
 
 router.get("/:id",auth,async (req,res)=> {
+  const {id}=req.params;
   try{
 
-  const {id} = req.params
-  const {order}=await db.query(
+  
+  const {rows: orderRows }=await db.query(
     "SELECT * FROM orders WHERE id=? AND user_id=$1",
     [id,req.user.id]
   )
-  if(order.length === 0){
+  if(orderRows.length === 0){
     return res.status(404).json({error:"Order not found"})
   }
-  const {items} = await db.query(
+  const {rows: items} = await db.query(
      `
      SELECT oi.id,oi.quantity,oi.price,p.name,p.image
      FROM order_items oi
@@ -26,7 +27,7 @@ router.get("/:id",auth,async (req,res)=> {
      [id]
   )
   res.json({
-    order: order[0],
+    order: orderRows[0],
     items
   })
 } catch (err){
@@ -37,11 +38,11 @@ router.get("/:id",auth,async (req,res)=> {
 })
 router.get("/",auth,async (req,res)=>{
   try{
-    const {orders}=await db.query(
+    const {rows}=await db.query(
       "SELECT * FROM orders WHERE user_id =$1 ORDER BY id DESC",
       [req.user.id] 
     )
-    res.json(orders)
+    res.json(rows)
   } catch(err){
     res.status(500).json({error:err.message})
   }

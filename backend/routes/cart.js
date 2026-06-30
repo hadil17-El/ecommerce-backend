@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", auth, async (req, res) => {
   try {
-    const {rows} = await db.query(
+    const { rows } = await db.query(
       `SELECT cart.*, products.name, products.image, products.price
        FROM cart
        JOIN products ON cart.product_id = products.id
@@ -57,7 +57,7 @@ router.post("/", auth, async (req, res) => {
 router.delete("/", auth, async (req, res) => {
   const { id } = req.body;
   try {
-    await db.query("DELETE FROM cart WHERE id = $!", [id]);
+    await db.query("DELETE FROM cart WHERE id = $1", [id]);
     res.json({ message: "deleted" });
   } catch{
     res.status(500).json({ error: "Errore server" });

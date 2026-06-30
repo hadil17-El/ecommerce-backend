@@ -10,23 +10,24 @@ router.get("/", auth, async (req, res) => {
   }
 
   try {
-    const [[{ revenue }]] = await db.query(
+    const { rows:revenueRows } = await db.query(
       "SELECT SUM(total) as revenue FROM orders"
     );
-    const [[{ orders }]] = await db.query(
+    const { rows: ordersRows } = await db.query(
       "SELECT COUNT(*) as orders FROM orders"
     );
-    const [[{ users }]] = await db.query(
+    const { rows: usersRows } = await db.query(
       "SELECT COUNT(*) as users FROM users"
     );
-    const [[{ products }]] = await db.query(
+    const { rows:productsRows } = await db.query(
       "SELECT COUNT(*) as products FROM products"
     );
 
     res.json({ 
-      revenue:Number(revenue) || 0,
-       orders:Number(orders),users:Number(users),
-        products:Number(products),
+      revenue:Number(revenueRows[0].revenue),
+       orders:Number(ordersRows[0].orders),
+       users:Number(usersRows[0].users),
+        products:Number(productsRows[0].products),
        });
   } catch {
     res.status(500).json({ error: "Errore server" });
