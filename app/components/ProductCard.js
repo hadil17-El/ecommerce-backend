@@ -61,7 +61,7 @@ export default function ProductCard({product}){
                 return prev.filter(f=>f.id !== product.id)
             }
         })
-    await toggleFavorite(product.id)
+  
     const updated = await getFavorites()
     setFavorites(updated)
     }
