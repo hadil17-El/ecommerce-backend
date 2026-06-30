@@ -31,6 +31,9 @@ router.post("/", auth, async (req, res) => {
        `INSERT INTO orders (user_id, total, status) VALUES ($1, $2, 'pending') RETURNING id`,
       [user_id, total]
     );
+    if(!orderRows.length){
+      throw new Error("Order creation failed");
+    }
     const order_id = orderRows[0].id;
 
     for (const item of cart) {
