@@ -8,19 +8,24 @@ export default function OrderDetails(){
     const [data,setData] = useState(null)
 
     useEffect(()=>{
-        async function load(){
+        
+async function load(){
+    try{
             const res = await getOrderDetails(id)
             setData(res)
+        } catch (err){
+            console.error(err)
         }
+    }
         load()
     },[id])
-    if(!data) return <p>Loading...</p>
+    if(!data?.order) return <p>Loading...</p>
     return (
         <div className="order-details">
             <h1>Order #{data.order.id}</h1>
 
             <div className="order-items">
-                {data.items.map(item => (
+                {data.items?.map(item => (
                     <div key={item.id} className="order-item">
                         <img src={`/image/${item.image}`} />
                         <div>

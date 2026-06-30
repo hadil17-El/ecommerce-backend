@@ -8,16 +8,20 @@ export default function PaymentPage(){
 
     useEffect(()=>{
         async function porcess(){
+            try{
             const data=await checkoutOrder()
 
-            if(data.error){
-                alert(data.error)
+            if(!data || data.error){
+                alert(data?.error || "Chckout failed")
                 router.push("/cart")
                 return
             }
             router.push(`/orders/${data.order_id}`)
-        }
-    process()
+        } catch (err){
+            console.error(err)
+            router.push("/cart")
+        }}
+    porcess()
 },[])
 return(
     <div style={{
@@ -27,5 +31,4 @@ return(
         <h1>Processing Payment...</h1>
         <p>Please wait</p>
     </div>
-)
-}
+)}
