@@ -3,7 +3,7 @@ import db from "../db.js";
 import auth from "../middleware.js";
 
 const router = express.Router();
-//GET favorites
+
 router.get("/",auth,async(req,res)=>{
   try{
     const { rows }=await db.query(
