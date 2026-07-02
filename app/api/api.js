@@ -14,7 +14,6 @@ function getAuthHeaders(){
         Authorization: `Bearer ${token}`
     }
 }
-//get prodotti
 export async function getProducts(){
     const res = await fetch(BASE_URL,{
         headers:getAuthHeaders()
@@ -23,7 +22,6 @@ export async function getProducts(){
         return res.json()
 }
 
-//post aggiungi prodotto
 export async function addProduct(product){
     const user = JSON.parse(localStorage.getItem("user"))
     const res=await fetch(BASE_URL,{
@@ -36,7 +34,6 @@ export async function addProduct(product){
     })
     return res.json()
 }
-//delete prodotto
 export async function deleteProduct(id){
     const user = JSON.parse(localStorage.getItem("user"))
     const res=await fetch(`${BASE_URL}?id=${id}`,{
@@ -95,7 +92,7 @@ export async function getCart(){
              `Bearer ${token}`
         } : {}
     })
-    if(!res.ok) return [] //getisci 401 e altri errori
+    if(!res.ok) return [] 
         return res.json()
 }
 export async function removeFromCart(id){
@@ -118,10 +115,10 @@ export async function getRecommendedProducts(userId){
 
     )
     if (!res.ok) return []
-    const text = await res.text()//legge il body della risposta come stringa grezza,invece di parsarlo subito
-    if(!text.trim()) return []//rimuove spazi e newline.se dopo il trim la stringa è vuota ,!text.trim() è true e ritorniamo subito un array vuoto invece di andare in errore
-    return JSON.parse(text)//converte la stringa json in un og/array che è l'equivalente di res.json() cosi ora siamo sicuri che text non è vuoto
-    //return await res.json() il mio problema è che il server risponde con status 200 ma body vuoto
+    const text = await res.text()
+    if(!text.trim()) return []
+    return JSON.parse(text)
+    
 }
 export async function updateProduct(product){
     const user =JSON.parse(localStorage.getItem("user"))
@@ -157,7 +154,7 @@ export async function getAnalytics() {
             }
         }
     )
-  const text = await res.text() //leggi come testo
+  const text = await res.text()
   console.log("analytics raw: ",text)
   try{
     return JSON.parse(text)
@@ -183,7 +180,6 @@ export async function updateCartQuantity(id, action) {
 
 const FAVORITES_URL = "https://ecommerce-backend-uwgf.onrender.com/favorites"
 
-// GET
 export async function getFavorites(){
     const token = localStorage.getItem("token")
     if(!token) return [] //esci subito se non c'è token
@@ -196,7 +192,7 @@ export async function getFavorites(){
     return res.json()
 }
 
-// ADD
+
 export async function addFavorite(product_id){
     const res = await fetch(FAVORITES_URL, {
         method: "POST",
@@ -209,7 +205,7 @@ export async function addFavorite(product_id){
     return res.json()
 }
 
-// DELETE
+
 export async function removeFavorite(product_id){
     const res = await fetch(FAVORITES_URL, {
         method: "DELETE",
