@@ -1,51 +1,4 @@
-/*
-.trends-section {
-    padding: 20px;
-}
 
-.trends-header {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-.trends-container {
-    display: flex;
-    cursor: grab;
-    gap: 15px;
-    width: 100%;
-    padding: 10px 0;
-    animation: scroll 25s linear infinite;
-    scroll-snap-type: x mandatory;
-    overflow-x: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-.trends-container::-webkit-scrollbar{
-    display: none
-}
-.trends-container:hover{
-    animation-play-state: paused;
-}
-
-@keyframes scroll {
-    
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
-}
-.trends-container:active {
-    cursor: grabbing;
-}
-.trends-container::-webkit-scrollbar{
-    display: none;
-}
-.trends-container > * {
-    flex: 0 0 auto ;
-    scroll-snap-align: start;
-}*/
 .trends-section{
     padding: 20px;
     margin-bottom: 10rem;
@@ -58,7 +11,7 @@
     font-weight: 700;
 }
 
-/* 🔥 bottone */
+
 .trend-btn{
 
     margin-top:20px;
