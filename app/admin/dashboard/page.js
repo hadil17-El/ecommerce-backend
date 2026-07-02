@@ -94,13 +94,3 @@ export  default  function Dashboard(){
     )
 }
 
-/**1. "use client" + async function Dashboard
-
-In un Client Component:
-
-"use client"
-export default async function Dashboard()
-
-👉 NON è valido in React/Next.js.
-
-✔️ Un Client Component deve essere sincrono. */
