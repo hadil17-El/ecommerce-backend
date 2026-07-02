@@ -27,27 +27,8 @@ export default function Header(){
         }
     },[])
  function handleSearch(e){
-    /**quando fai submit di un form html ,la pagina si ricarica ,preventDefault blocca il comportamento standard del browser */
     e.preventDefault()
-    /**
-     * query:quello che scrive l utente
-     * .trim():rimuove spazi vuoti
-     * quindi questo if significa:se è vuoto allora non fare nulla
-     * se non cambia pagina senza ricaricare il sito
-     * questo è un routing dinamico(nextjs app router)
-     * 
-     * onSubmit={handleSearch} signfica :quando premi enter o submit esegui handleSearch
-     * (e)=>setQuery(e.targe.value):quando utente scrive e.targe.value=testo scritto aggiorna stato react
-     * 
-     * aria-label="Search products":serve per accessibilità,aiuta screen reader a capire lo scopo dell input
-    value={query}
-    onChange={(e)=>setQuery(e.target.value)} :cui controlle input : cosa signfica :significa che il valore dell’input non è gestito dal browser, ma da React
-    senza quello :Il browser gestisce tutto:
-scrivi dentro
-il valore resta lì nel DOM
-React NON sa cosa stai scrivendo
-con onchange((e)=>setQuery(e.target.value)) :ogni volta che scrivi qualcosa aggiorna stato query con quello che hai scritto
-    */
+  
     if(!query.trim()) return
 
     router.push(`/shop?search=${query}`)
