@@ -1,5 +1,3 @@
-//perche questo file cui ?
-/**è il layout condiviso di tutta l area admin.in nextjs ,un file layout.js wrappa auto tutte le pagina nella stessa cartella .quindi ogni pagina sotto /admin/ eredita questa sidebar senza doverla reimportare */
 "use client"
 import Link from "next/link"
 
