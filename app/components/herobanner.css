@@ -32,7 +32,6 @@ object-fit: cover;
     z-index: 2;
     font-size: 30px;
 }
-/*pagination(puntini) */
 .swiper-pagination-bullet {
     background: white;
     opacity: 0.5;
