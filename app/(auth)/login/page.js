@@ -5,17 +5,15 @@ import {useRouter} from "next/navigation"
 import "./login.css"
 import Link from "next/link"
 export default function Login(){
-    //Serve a salvare i dati del form.
+
     const [form,setForm]= useState({
         email:"",
         password:""
     })
-    //Serve a salvare eventuali errori di login.
+   
     const [error,setError] = useState("")
-    //Serve a gestire lo stato di caricamento durante la richiesta di login.Serve per sapere se la richiesta login è in corso.stato iniziale è false :NON sta caricando
     const [loading,setLoading]=useState(false)
     const router = useRouter()
-    //Funzione per gestire il login dell'utente.
   async function handleLogin(e){
     e.preventDefault()
 
