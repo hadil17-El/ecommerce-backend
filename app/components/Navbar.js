@@ -22,7 +22,6 @@ export default function Navbar(){
     function logout(){
         localStorage.removeItem("token")
         localStorage.removeItem("user")
-//window.location.href="/":in nextjs non è la scelta migliore .funziona ma perde SPA behavior
         router.push("/login")
     }
 if(!user){
