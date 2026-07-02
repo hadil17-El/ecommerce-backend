@@ -1,6 +1,5 @@
 "use client"
 import { useEffect, useState,useCallback } from "react";
-//useCallback:cosa è
 import { useRouter } from "next/navigation";
 import { addProduct, deleteProduct, getProducts, updateProduct } from "../../api/api";
 import "../adminPanel.css"
@@ -21,10 +20,8 @@ export default function AdminPanel(){
     const [error,setError]=useState("")
     const [editingProduct,setEditingProduct]=useState(null)
     const [showModal,setShowModal]=useState(false)
-    //è una arrow function asincrona
 
         const loadProducts=useCallback(async()=>{
-                        //dentro fa una cosa: prende dati e aggiorna lo state
             const data = await getProducts()
             setProducts(data)
         },[])
@@ -35,7 +32,6 @@ export default function AdminPanel(){
             router.push("/login")
             return //perche return cui:
         }
-           //👉 perché vogliamo eseguirla appena il componente monta
         loadProducts()
     },[loadProducts])
 
@@ -71,19 +67,7 @@ export default function AdminPanel(){
        setEditingProduct(null)
        await loadProducts()
     }
-  //carica prodotti
-    /**🔥 Flusso completo
-
-Quando il componente parte:
-
-React monta il componente
-useEffect si attiva (una sola volta perché [])
-viene creata fetchData
-viene chiamata fetchData()
-API chiamata → dati ricevuti
-setProducts(data)
-React aggiorna la UI */
-
+ 
     
 async function handleDelete(id){
     if(!confirm("Sei sicuro di voler elminiare questo prodotto?")) return
@@ -163,7 +147,6 @@ async function handleUpdate(){
                                 onChange={(e)=>setForm({...form,gender:e.target.value}) }
                                 />
                             </div>
-                       {/**disabled={loading}:cosa signfica : significa che l 'attributo disabled del pulsante assume il valore della variabile loading ,quindi se loading è true allora il pulsante è disabilitato e non puo essere cliccato   */}
                             <button className="btn-add" type="submit" disabled={loading}>
                                 {loading ? "Aggiunta...":"+ Aggiungi prodotto"}
                                 </button>
