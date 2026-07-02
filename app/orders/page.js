@@ -9,10 +9,9 @@ export default function OrdersPage(){
     const [orders,setOrders]=useState([])
 
     useEffect(()=>{
-        //questa funzione serve perche react non vuole direttamente async dentro useEffect
         async function load(){
         const data = await getOrders()
-        setOrders(Array.isArray(data) ? data : []) //per sicurezza se il backend sbaglia allora non crasha e forza array vuoto
+        setOrders(Array.isArray(data) ? data : []) 
         }
         load()
     },[])
